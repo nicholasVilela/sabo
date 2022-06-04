@@ -1,1 +1,2 @@
-A simple game engine written in the powerful Rust language with Glium and OpenGL
+A simple game engine written in Rust with Glium.\
+:warning: `THIS PROJECT IS NOT CURRENTLY IN A WORKING STATE`
