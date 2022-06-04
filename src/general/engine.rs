@@ -19,20 +19,19 @@ pub struct Engine {
 }
 
 impl Engine {
+    /// Create the Engine.
     pub fn new() -> Engine {
         return Engine {
 
         }
     }
 
+    /// Run the Engine. This houses the 
+    /// updating and rendering of the game.
     pub fn run(&mut self) {
         let event_loop = EventLoop::new();
         let mut ctx = Context::new(&event_loop);
 
         Window::update(&mut ctx, event_loop);
     }
-
-    // pub fn render(&mut self) {
-    //     Window::render(&mut self.ctx);
-    // }
 }

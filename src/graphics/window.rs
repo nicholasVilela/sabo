@@ -28,11 +28,7 @@ impl Window {
 
     pub fn update(ctx: &mut Context, event_loop: EventLoop<()>) {
         event_loop.run(move |mut event, _, control_flow| {
-            println!("ahh");
+
         });
-    }
-
-    pub fn render(ctx: &mut Context) {
-
     }
 }
