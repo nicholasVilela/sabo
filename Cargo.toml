@@ -1,6 +1,6 @@
 [package]
 name = "sabo"
-version = "0.1.1"
+version = "0.1.01"
 authors = ["Nicholas Vilela <nvilela01@gmail.com>"]
 edition = "2021"
 keywords = ["sabo", "game", "engine", "2D", "graphics"]
