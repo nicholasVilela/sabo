@@ -1,0 +1,15 @@
+[package]
+name = "game_engine"
+version = "0.1.0"
+authors = ["Nicholas Vilela <nvilela01@gmail.com>"]
+edition = "2021"
+keywords = ["game", "engine", "2D", "graphics"]
+categories = ["game-engines"]
+description = "Simple 2D Game Engine"
+license-file = "LICENSE"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+glium = "*"
