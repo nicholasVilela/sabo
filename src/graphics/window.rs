@@ -1,6 +1,7 @@
 use glium::{
     glutin::{
-        event_loop::{EventLoop},
+        event_loop::{EventLoop, ControlFlow},
+        event::{Event, WindowEvent},
         window::{WindowBuilder},
         ContextBuilder,
     },
@@ -27,8 +28,21 @@ impl Window {
     }
 
     pub fn update(ctx: &mut Context, event_loop: EventLoop<()>) {
-        event_loop.run(move |mut event, _, control_flow| {
-
+        event_loop.run(move |mut ev, _, control_flow| {
+            match ev {
+                Event::WindowEvent { event, .. } => match event {
+                    WindowEvent::CloseRequested => {
+                        *control_flow = ControlFlow::Exit;
+                        return;
+                    },
+                    _ => return,
+                },
+                _ => (),
+            }
         });
+    }
+
+    pub fn display(&mut self) -> &mut Display {
+        return &mut self.display;
     }
 }
