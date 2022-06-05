@@ -1,10 +1,13 @@
+use std::{
+    collections::{HashMap},
+};
 use glium::{
     glutin::{
         event_loop::{EventLoop},
     },
 };
 use crate::{
-    general::{Context},
+    general::{Context, Scene},
     graphics::{Window},
 };
 
@@ -15,13 +18,17 @@ use crate::{
 /// a map of scenes. Then, call the `run()`
 /// function.
 pub struct Engine {
-    running: bool
+    scene_map: HashMap<String, Box<dyn Scene>>,
+    scene_stack: Vec<String>,
+    running: bool,
 }
 
 impl Engine {
     /// Create the Engine.
-    pub fn new() -> Engine {
+    pub fn new(scene_map: HashMap<String, Box<dyn Scene>>, starting_scene: &str) -> Engine {
         return Engine {
+            scene_map,
+            scene_stack: vec![starting_scene.to_string()],
             running: false,
         }
     }
@@ -34,5 +41,10 @@ impl Engine {
         let mut ctx = Context::new(&event_loop);
 
         Window::update(&mut ctx, event_loop);
+    }
+
+    pub fn scene(&mut self) -> &Box<dyn Scene> {
+        let scene: &Box<dyn Scene> = self.scene_map.get(&self.scene_stack[0]).unwrap();
+        return scene;
     }
 }

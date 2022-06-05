@@ -762,7 +762,6 @@ checksum = "7ef03e0a2b150c7a90d01faf6254c9c48a41e95fb2a8c2ac1c6f0d2b9aefc342"
 [[package]]
 name = "sabo"
 version = "0.1.1"
-source = "git+https://github.com/nicholasVilela/sabo#94951acc82cf150be1b252871c5324b2709192b1"
 dependencies = [
  "glium",
 ]

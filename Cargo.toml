@@ -5,10 +5,15 @@ authors = ["Nicholas Vilela <nvilela01@gmail.com>"]
 edition = "2021"
 keywords = ["sabo", "game", "engine", "2D", "graphics"]
 repository = "https://github.com/nicholasVilela/sabo"
+exclude = ["examples/*"]
 categories = ["game-engines"]
 description = "Simple 2D Game Engine in Rust with Glium."
 license-file = "LICENSE"
 readme = "README.md"
+
+[[example]]
+name = "snake"
+path = "./examples/snake/src/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
