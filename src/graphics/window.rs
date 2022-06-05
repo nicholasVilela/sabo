@@ -28,7 +28,7 @@ impl Window {
     }
 
     pub fn update(ctx: &mut Context, event_loop: EventLoop<()>) {
-        event_loop.run(move |mut ev, _, control_flow| {
+        event_loop.run(move | ev, _, control_flow| {
             match ev {
                 Event::WindowEvent { event, .. } => match event {
                     WindowEvent::CloseRequested => {
