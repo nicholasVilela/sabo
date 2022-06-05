@@ -8,7 +8,7 @@ use glium::{
     Display,
 };
 use crate::{
-    general::{Context},
+    general::{Context, Scene, Engine},
 };
 
 
@@ -27,9 +27,9 @@ impl Window {
         }
     }
 
-    pub fn update(ctx: &mut Context, event_loop: EventLoop<()>) {
+    pub fn update(mut ctx: Context, event_loop: EventLoop<()>, mut engine: Engine) {
         event_loop.run(move | ev, _, control_flow| {
-            *control_flow = ControlFlow::Wait;
+            *control_flow = ControlFlow::Poll;
 
             match ev {
                 Event::WindowEvent { event, .. } => match event {
@@ -38,6 +38,10 @@ impl Window {
                         return;
                     },
                     _ => return,
+                },
+                Event::MainEventsCleared => {
+                    engine.scene().update(&mut ctx);
+                    engine.scene().render(&mut ctx);
                 },
                 _ => (),
             }

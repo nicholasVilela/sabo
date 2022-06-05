@@ -18,14 +18,14 @@ use crate::{
 /// a map of scenes. Then, call the `run()`
 /// function.
 pub struct Engine {
-    scene_map: HashMap<String, Box<dyn Scene>>,
+    scene_map: HashMap<String, Scene>,
     scene_stack: Vec<String>,
     running: bool,
 }
 
 impl Engine {
     /// Create the Engine.
-    pub fn new(scene_map: HashMap<String, Box<dyn Scene>>, starting_scene: &str) -> Engine {
+    pub fn new(scene_map: HashMap<String, Scene>, starting_scene: &str) -> Engine {
         return Engine {
             scene_map,
             scene_stack: vec![starting_scene.to_string()],
@@ -35,16 +35,17 @@ impl Engine {
 
     /// Run the Engine. This houses the 
     /// updating and rendering of the game.
-    pub fn run(&mut self) {
+    pub fn run(mut self) {
         self.running = true;
         let event_loop = EventLoop::new();
-        let mut ctx = Context::new(&event_loop);
+        let ctx = Context::new(&event_loop);
+        let scene = self.scene();
 
-        Window::update(&mut ctx, event_loop);
+        Window::update(ctx, event_loop, self);
     }
 
-    pub fn scene(&mut self) -> &Box<dyn Scene> {
-        let scene: &Box<dyn Scene> = self.scene_map.get(&self.scene_stack[0]).unwrap();
+    pub fn scene(&mut self) -> &mut Scene {
+        let scene: &mut Scene = self.scene_map.get_mut(&self.scene_stack[0]).unwrap();
         return scene;
     }
 }

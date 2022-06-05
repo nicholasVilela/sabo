@@ -1,5 +1,5 @@
 use sabo::{
-    general::{Scene},
+    general::{Scene, SceneTrait, Context},
 };
 
 
@@ -15,6 +15,16 @@ impl Game {
     }
 }
 
-impl Scene for Game {
-    
+impl SceneTrait for Game {
+    fn update(&mut self, ctx: &mut Context) {
+        println!("Updating Game Scene");
+    }
+
+    fn fixed_update(&mut self, ctx: &mut Context) {
+
+    }
+
+    fn render(&mut self, ctx: &mut Context) {
+        println!("Rendering Game Scene");
+    }
 }

@@ -10,7 +10,7 @@ pub use scenes::*;
 
 
 fn main() {
-    let game: Box<dyn Scene> = Box::new(Game::new());
+    let game: Scene = Box::new(Game::new());
 
     let mut scene_map = HashMap::new();
     scene_map.insert("game".to_string(), game);
