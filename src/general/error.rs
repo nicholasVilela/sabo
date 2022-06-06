@@ -1,10 +1,9 @@
 use std::{
-    fmt,
+    fmt, 
+    error::Error,
 };
 
-
-pub type GameResult<T: ()> = Result<T, GameError>;
-
+#[derive(Debug, Clone)]
 pub enum GameError {
     CustomError(String),
 }
@@ -21,7 +20,9 @@ impl fmt::Display for GameError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
             GameError::CustomError(ref message) => write!(f, "Custom error: {}", message),
-            _ => write!(f, "GameError: {:?}", self);
+            _ => write!(f, "GameError: {:?}", self),
         }
     }
 }
+
+pub type GameResult<T = ()> = Result<T, GameError>;

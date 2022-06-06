@@ -15,6 +15,6 @@ fn main() {
     let mut scene_map = HashMap::new();
     scene_map.insert("game".to_string(), game);
 
-    let mut engine = Engine::new(scene_map, "game");
+    let engine = Engine::new(scene_map, "game");
     engine.run();
 }

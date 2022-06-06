@@ -12,6 +12,7 @@ use crate::{
 };
 
 
+/// Window keeps track of the screen and updates the event loop.
 pub struct Window {
     display: Display,
 }
