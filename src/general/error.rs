@@ -3,6 +3,8 @@ use std::{
     error::Error,
 };
 
+
+/// Tailor made errors specifically for this engine.
 #[derive(Debug, Clone)]
 pub enum GameError {
     CustomError(String),
@@ -25,4 +27,5 @@ impl fmt::Display for GameError {
     }
 }
 
+/// Wrapper type for `Result<T, GameError>`
 pub type GameResult<T = ()> = Result<T, GameError>;

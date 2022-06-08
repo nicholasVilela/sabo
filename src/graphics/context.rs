@@ -8,8 +8,6 @@ use crate::{
 };
 
 
-/// Graphics Context controls the Window. Will be used to
-/// draw to the screen.
 pub struct GraphicsContext {
     pub window: Window,
 }

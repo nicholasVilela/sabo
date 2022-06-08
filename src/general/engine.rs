@@ -7,7 +7,7 @@ use glium::{
     },
 };
 use crate::{
-    general::{Context, Scene},
+    general::{Context, Scene, error::GameResult},
     graphics::{Window},
 };
 
@@ -18,13 +18,13 @@ use crate::{
 /// a map of scenes. Then, call the `run()`
 /// function.
 pub struct Engine {
-    scene_map: HashMap<String, Scene>,
+    scene_map: HashMap<String, SceneManager>,
     scene_stack: Vec<String>,
     running: bool,
 }
 
 impl Engine {
-    /// Create the Engine.
+    /// Create a new Engine.
     pub fn new(scene_map: HashMap<String, Scene>, starting_scene: &str) -> Engine {
         return Engine {
             scene_map,
@@ -33,17 +33,30 @@ impl Engine {
         }
     }
 
-    /// Run the Engine. This houses the 
-    /// updating and rendering of the game.
-    pub fn run(mut self) {
+    /// This will run the Engine and start the event loop on
+    /// the Window.
+    pub fn run(mut self) -> GameResult {
         self.running = true;
         let event_loop = EventLoop::new();
         let ctx = Context::new(&event_loop);
-        let scene = self.scene();
 
-        Window::update(ctx, event_loop, self);
+        Window::process(ctx, event_loop, self)?;
+
+        return Ok(());
     }
 
+    /// Update the current scene.
+    pub fn update(&mut self, ctx: &mut Context) -> GameResult {
+        let scene = self.scene();
+
+        scene.update(ctx)?;
+        scene.render(ctx)?;
+        // Window::render(ctx, );
+
+        return Ok(());
+    }
+
+    /// Get current scene.
     pub fn scene(&mut self) -> &mut Scene {
         let scene: &mut Scene = self.scene_map.get_mut(&self.scene_stack[0]).unwrap();
         return scene;

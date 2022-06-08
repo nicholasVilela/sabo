@@ -6,9 +6,11 @@ use glium::{
         ContextBuilder,
     },
     Display,
+    Frame,
 };
 use crate::{
-    general::{Context, Scene, Engine},
+    general::{Context, Scene, Engine, error::GameResult},
+    graphics::{Canvas},
 };
 
 
@@ -18,6 +20,7 @@ pub struct Window {
 }
 
 impl Window {
+    /// Creates a new Window.
     pub fn new(event_loop: &EventLoop<()>) -> Window {
         let wb = WindowBuilder::new();
         let cb = ContextBuilder::new();
@@ -28,7 +31,8 @@ impl Window {
         }
     }
 
-    pub fn update(mut ctx: Context, event_loop: EventLoop<()>, mut engine: Engine) {
+    /// Starts the Event Loop and updates the Engine.
+    pub fn process(mut ctx: Context, event_loop: EventLoop<()>, mut engine: Engine) -> GameResult {
         event_loop.run(move | ev, _, control_flow| {
             *control_flow = ControlFlow::Poll;
 
@@ -41,14 +45,23 @@ impl Window {
                     _ => return,
                 },
                 Event::MainEventsCleared => {
-                    engine.scene().update(&mut ctx);
-                    engine.scene().render(&mut ctx);
+                    engine.update(&mut ctx);
                 },
                 _ => (),
             }
         });
     }
 
+    pub fn render(ctx: &mut Context, canvas: &Canvas) -> GameResult {
+        let window = ctx.graphics_context.window;
+        let mut target = window.display.draw();
+        // target.clear_color(0.0, 0.0, 0.0, 1.0);
+        target.set_finish().unwrap();
+
+        return Ok(());
+    }
+
+    /// Get a mutable reference to the Window's Display.
     pub fn display(&mut self) -> &mut Display {
         return &mut self.display;
     }
